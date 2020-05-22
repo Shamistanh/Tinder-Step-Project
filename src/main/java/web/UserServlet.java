@@ -1,7 +1,6 @@
 package web;
 
 import beans.User;
-import controller.Users;
 import service.LikeCollection;
 
 import javax.servlet.ServletException;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +26,7 @@ public class UserServlet extends HttpServlet {
 
        // Users usr = new Users();
         List<User> students = likeCollection.like_collection();
+        System.out.println(likeCollection.like_collection());
         data.put("users", students);
         //data.put("day", day);
 

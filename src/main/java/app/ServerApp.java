@@ -13,6 +13,8 @@ public class ServerApp {
         ServletContextHandler handler = new ServletContextHandler();
 
         handler.addServlet(new ServletHolder(new LikeServlet(engine)), "/users");
+        handler.addServlet(new ServletHolder(new CookieGet()), "/cg/*");
+        handler.addServlet(new ServletHolder(new CookieRemove()), "/cr/*");
         handler.addServlet(new ServletHolder(new UserServlet(engine)), "/user-list");
         //handler.addServlet(new ServletHolder(new RedirectServlet("/register")), "/");
         handler.addServlet(new ServletHolder(new MessageServlet(engine)), "/messages");

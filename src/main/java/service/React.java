@@ -1,6 +1,7 @@
 package service;
 
 import controller.DBConnector;
+import web.CookieGet;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -19,20 +20,25 @@ public class React extends HttpServlet {
     static HashMap<String, String> rmap = new HashMap<>();
     static String USER_ID = "u_id";
     static String LIKE_ID = "liked_id";
+    static String PLACEHOLDER1="helekiboshdur";
+    static String PLACEHOLDER2="heleki bu da boshdur";
+    static CookieGet cg = new CookieGet();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Cookie[] cookies = req.getCookies();
 
-        //Arrays.stream(cookies).map(e-> e.getName().equals(USER_ID) ? rmap.put(USER_ID,e.getValue()) : rmap.put(LIKE_ID,e.getValue()));
 
-        for (Cookie cookie : cookies ){
-            if(cookie.getName().equals(USER_ID)){
-                rmap.put(USER_ID,cookie.getValue());
-            }else if(cookie.getName().equals(LIKE_ID)){
-                rmap.put(LIKE_ID,cookie.getValue());
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                resp.getWriter().write(cookie.getName()+" "+cookie.getValue()+"\n");
+                if (cookie.getName().equals(USER_ID)) {
+
+                    PLACEHOLDER1 = cookie.getValue();
+                }else if (cookie.getName().equals(LIKE_ID)) {
+                    PLACEHOLDER2 = cookie.getValue();
+                }
             }
-
         }
 
     }
@@ -42,10 +48,10 @@ public class React extends HttpServlet {
             Connection con = DBConnector.initializeDatabase();
             PreparedStatement st = con
                     .prepareStatement("insert into reactions (who,whom,reaction) values(?, ?, ?)");
-            st.setString(1, rmap.get(USER_ID));
-            st.setString(2, rmap.get(LIKE_ID));
+            st.setString(1, cg.getHm().get(USER_ID));
+            st.setString(2, cg.getHm().get(LIKE_ID));
             st.setInt(3, reaction);
-            System.out.println(rmap.get(USER_ID)+"  "+rmap.get(LIKE_ID));
+          //  System.out.println(cg.getHm().get(USER_ID)+"  "+cg.getHm().get(LIKE_ID));
             st.executeUpdate();
             st.close();
             con.close();

@@ -1,7 +1,8 @@
-package controller;
+package service;
 
 
 import beans.User;
+import controller.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,5 +53,15 @@ public class Users {
         }
 
         return ar;
+    }
+
+    public List<User> likeblePeople(String user_id) {
+        List<User> likebles = new ArrayList<>();
+        for (int i = 0; i <people().size() ; i++) {
+            if (!people().get(i).equals(user_id)){
+                likebles.add(people().get(i));
+            }
+        }
+        return likebles;
     }
 }

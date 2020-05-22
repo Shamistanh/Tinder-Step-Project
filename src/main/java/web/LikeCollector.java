@@ -40,7 +40,7 @@ public class LikeCollector extends HttpServlet {
         } else if (reaction.equals("dislike")) {
             react.ireact(2);
         }
-        resp.sendRedirect("/users");
+//        resp.sendRedirect("/users");
 
     }
 

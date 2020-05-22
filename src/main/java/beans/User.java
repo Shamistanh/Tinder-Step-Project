@@ -28,4 +28,8 @@ public class User {
         this.date = date;
         this.id = id;
     }
+
+    public User() {
+
+    }
 }
