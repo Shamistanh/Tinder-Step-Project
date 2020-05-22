@@ -49,9 +49,9 @@ public class LoginServlet extends HttpServlet {
         user = request.getParameter("logemail");
         pwd = request.getParameter("logpsw");
         if(checker.check(user, pwd)){
-            Cookie c = new Cookie("u_id", myID.id());
-            c.setMaxAge(60 * 60 * 24 * 7);
-            response.addCookie(c);
+//            Cookie c = new Cookie("u_id", myID.id());
+//            c.setMaxAge(60 * 60 * 24 * 7);
+//            response.addCookie(c);
             response.sendRedirect("/users");
         }else {
             response.sendRedirect("/login");

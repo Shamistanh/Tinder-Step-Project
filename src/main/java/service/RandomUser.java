@@ -11,28 +11,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomUser extends HttpServlet {
+public class RandomUser {
 
     static Users usrs = new Users();
     static List<User> all_users = usrs.people();
     static List<User> likebles = new ArrayList<>();
     static String USER_ID = "u_id";
-    static String MY_ID;
+    static MyID myID  = new MyID();
+    static String MY_ID = myID.id();
     static List<User> likeble_users = usrs.likeblePeople(MY_ID);
     static User delivered = new User();
 
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies();
-        for (Cookie cookie : cookies) {
-            System.out.println("kukinin adi"+cookie.getName());
-            if (cookie.getName().equals(USER_ID)) {
-                MY_ID = cookie.getValue();
-            }
-
-        }
-    }
 
     public static User generateRandom() {
         if (likeble_users.isEmpty()){
