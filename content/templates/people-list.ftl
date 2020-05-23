@@ -50,10 +50,12 @@
                                    <td>
 
                                        <form method="get" >
-                                           <input type="text" name="user_idd" value="${user.getId()}"/>
+                                           <input type="hidden" name="user_idd" value="${user.getId()}"/>
                                            <input type="submit">
 
                                        </form>
+
+
 
 
 

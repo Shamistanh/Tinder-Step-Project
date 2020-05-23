@@ -4,9 +4,7 @@ import beans.Message;
 import service.MessageHandling;
 import service.MessageService;
 import service.MyID;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,12 +38,16 @@ public class MessageServlet  extends HttpServlet {
         String cookiess = Arrays.stream(cookies)
                 .map(c -> String.format("%s-%s", c.getName(), c.getValue()))
                 .collect(Collectors.joining());
+        if (cookiess.split("-").length>1){
+            sender_id = cookiess.split("-")[1];
+            List<Message> all_sent  = isent.allMessages(myID.id(), sender_id);
+            List<Message> all_reveived  = isent.allMessages(sender_id,myID.id());
+            data.put("sents", all_sent);
+            data.put("receivings", all_reveived);
 
-        sender_id = cookiess.split("-")[1];
-        List<Message> all_sent  = isent.allMessages(myID.id(), sender_id);
-        List<Message> all_reveived  = isent.allMessages(sender_id,myID.id());
-        data.put("sents", all_sent);
-        data.put("receivings", all_reveived);
+        }
+
+
         engine.render("chat.ftl", data,resp);
 
 

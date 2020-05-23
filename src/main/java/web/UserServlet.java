@@ -16,7 +16,7 @@ public class UserServlet extends HttpServlet {
 
     private final TemplateEngine engine;
 
-    String liked_id="sinaq";
+    String liked_id;
 
     public UserServlet(TemplateEngine engine) {
         this.engine = engine;
@@ -26,6 +26,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         HashMap<String, Object> data = new HashMap<>();
         LikeCollection likeCollection = new LikeCollection();
         // Users usr = new Users();
@@ -38,16 +39,18 @@ public class UserServlet extends HttpServlet {
         Cookie c = new Cookie("liked_id", liked_id);
         c.setMaxAge(60*60*24*7);
         resp.addCookie(c);
-
-        //data.put("day", day);
+        if (liked_id !=null){
+            resp.sendRedirect("/messages");
+        }
 
         engine.render("people-list.ftl", data, resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.sendRedirect("/user-list");
+
     }
 
 }
