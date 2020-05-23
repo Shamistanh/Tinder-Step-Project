@@ -6,6 +6,9 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import web.*;
 
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
+
 public class ServerApp {
     public static void main(String[] args) throws Exception {
         Server server = new Server(9000);
@@ -23,6 +26,8 @@ public class ServerApp {
         handler.addServlet(new ServletHolder(new StaticServlet("images")), "/images");
         handler.addServlet(new ServletHolder(new StaticServlet("js")), "/js/*");
         handler.addServlet(new ServletHolder(new StaticServlet("css")), "/css/*");
+//
+//        handler.addFilter(LoginFilter.class, "/messages", EnumSet.of(DispatcherType.REQUEST));
 
         server.setHandler(handler);
 

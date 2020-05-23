@@ -28,7 +28,7 @@ public class MessageServlet  extends HttpServlet {
 
     String msg_text="deyer";
     List<String> messages = new ArrayList<>();
-    MessageHandling isent  = new MessageHandling();
+    MessageHandling m_handl  = new MessageHandling();
     MessageService messageService  = new MessageService();
 
     @Override
@@ -40,10 +40,11 @@ public class MessageServlet  extends HttpServlet {
                 .collect(Collectors.joining());
         if (cookiess.split("-").length>1){
             sender_id = cookiess.split("-")[1];
-            List<Message> all_sent  = isent.allMessages(myID.id(), sender_id);
-            List<Message> all_reveived  = isent.allMessages(sender_id,myID.id());
+            List<Message> all_sent  = m_handl.allMessages(myID.id(), sender_id);
+            List<Message> all_reveived  = m_handl.allMessages(sender_id,myID.id());
             data.put("sents", all_sent);
             data.put("receivings", all_reveived);
+            data.put("opp_profile", m_handl.getProfile(sender_id));
 
         }
 

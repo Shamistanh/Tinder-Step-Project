@@ -38,6 +38,12 @@ public class LoginServlet extends HttpServlet {
                          HttpServletResponse response) throws ServletException, IOException {
         try (OutputStream os = response.getOutputStream()) {
             Files.copy(Paths.get("content/templates", "login.html"), os);
+//            if (user != null && pwd != null){
+//                Cookie c = new Cookie(user+"", pwd);
+//                c.setMaxAge(60 * 60 * 24 * 7);
+//                response.addCookie(c);
+//            }
+
         }
     }
 
@@ -49,9 +55,6 @@ public class LoginServlet extends HttpServlet {
         user = request.getParameter("logemail");
         pwd = request.getParameter("logpsw");
         if(checker.check(user, pwd)){
-//            Cookie c = new Cookie("u_id", myID.id());
-//            c.setMaxAge(60 * 60 * 24 * 7);
-//            response.addCookie(c);
             response.sendRedirect("/users");
         }else {
             response.sendRedirect("/login");

@@ -36,4 +36,23 @@ public class MessageHandling {
         }
         return message_coll;
     }
+
+    public String getProfile(String sender_id) {
+       String whom2="for now empty";
+        try {
+            Connection con = DBConnector.initializeDatabase();
+            PreparedStatement st = con
+                    .prepareStatement("select pic from users where id=?");
+            st.setString(1, sender_id);
+            ResultSet rset = st.executeQuery();
+            while (rset.next()) {
+               whom2 = rset.getString("pic");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return whom2;
+
+    }
 }
