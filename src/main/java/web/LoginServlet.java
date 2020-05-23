@@ -1,18 +1,15 @@
 package web;
 
-import service.Checker;
-import service.MyID;
+import userService.Checker;
+import userService.MyID;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +21,17 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String user = "";
     private static String pwd = "";
-    private static MyID myID = new MyID();
+    private static MyID myID;
+
+    static {
+        try {
+            myID = new MyID();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String getUser() {
         return user;
@@ -38,11 +45,7 @@ public class LoginServlet extends HttpServlet {
                          HttpServletResponse response) throws ServletException, IOException {
         try (OutputStream os = response.getOutputStream()) {
             Files.copy(Paths.get("content/templates", "login.html"), os);
-//            if (user != null && pwd != null){
-//                Cookie c = new Cookie(user+"", pwd);
-//                c.setMaxAge(60 * 60 * 24 * 7);
-//                response.addCookie(c);
-//            }
+
 
         }
     }

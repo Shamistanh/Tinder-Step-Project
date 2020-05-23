@@ -1,15 +1,17 @@
 package web;
 
 import beans.Message;
-import service.MessageHandling;
-import service.MessageService;
-import service.MyID;
+import lombok.SneakyThrows;
+import messageService.MessageHandling;
+import messageService.MessageService;
+import userService.MyID;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class MessageServlet  extends HttpServlet {
     String sender_id= "sinama";
     private TemplateEngine engine;
 
-    public MessageServlet(TemplateEngine engine) {
+    public MessageServlet(TemplateEngine engine) throws SQLException, ClassNotFoundException {
         this.engine = engine;
     }
 
@@ -31,6 +33,7 @@ public class MessageServlet  extends HttpServlet {
     MessageHandling m_handl  = new MessageHandling();
     MessageService messageService  = new MessageService();
 
+    @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HashMap<String, Object> data = new HashMap<>();
@@ -44,7 +47,8 @@ public class MessageServlet  extends HttpServlet {
             List<Message> all_reveived  = m_handl.allMessages(sender_id,myID.id());
             data.put("sents", all_sent);
             data.put("receivings", all_reveived);
-            data.put("opp_profile", m_handl.getProfile(sender_id));
+            data.put("opp_profile", m_handl.getProfile(sender_id).split("-")[0]);
+            data.put("header_name", m_handl.getProfile(sender_id).split("-")[1]);
 
         }
 

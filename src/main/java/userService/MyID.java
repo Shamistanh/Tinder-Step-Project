@@ -1,16 +1,30 @@
-package service;
+package userService;
 
-import controller.DBConnector;
+import connection.DBConnector;
 import web.LoginServlet;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MyID {
 
     static LoginServlet ls = new LoginServlet();
+    static Connection con;
 
+    static {
+        try {
+            con = DBConnector.initializeDatabase();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public MyID() throws SQLException, ClassNotFoundException {
+    }
 
     public static String id(){
         String id = null;
@@ -18,7 +32,7 @@ public class MyID {
 
 
             // Initialize the database
-            Connection con = DBConnector.initializeDatabase();
+
             PreparedStatement st = con
                     .prepareStatement("select id from users where username = ? and password=?");
 
@@ -34,5 +48,13 @@ public class MyID {
             e.printStackTrace();
         }
         return id;
+    }
+    protected void finalize() throws Throwable
+    {
+        try { con.close(); }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        super.finalize();
     }
 }

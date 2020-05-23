@@ -1,19 +1,20 @@
-package service;
+package messageService;
 
 import beans.Message;
-import beans.User;
-import controller.DBConnector;
+import connection.DBConnector;
+import userService.MyID;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageCollector {
 
 
-    public static List<Message> message_collection(){
+    public static List<Message> message_collection() throws SQLException, ClassNotFoundException {
         List<Message> message_coll = new ArrayList<>();
         MyID myID  = new MyID();
         try {
@@ -29,6 +30,8 @@ public class MessageCollector {
                 String date = rset.getString("date");
               message_coll.add(new Message(who,whom,message,date));
             }
+
+            con.close();
         }
         catch (Exception e) {
             e.printStackTrace();

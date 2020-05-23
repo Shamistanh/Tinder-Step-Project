@@ -1,12 +1,11 @@
-package service;
+package messageService;
 
-import controller.DBConnector;
+import connection.DBConnector;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class MessageService {
 
@@ -23,6 +22,7 @@ public class MessageService {
             st.executeUpdate();
             st.close();
             con.close();
+
         }
         catch (Exception e) {
             e.printStackTrace();

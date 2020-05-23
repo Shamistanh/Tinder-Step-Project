@@ -1,22 +1,38 @@
-package service;
+package messageService;
 
 import beans.Message;
-import controller.DBConnector;
+import connection.DBConnector;
+import userService.MyID;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageHandling {
 
+    static Connection con;
 
-    public static List<Message> allMessages(String who,String whom){
+    static {
+        try {
+            con = DBConnector.initializeDatabase();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public MessageHandling() throws SQLException, ClassNotFoundException {
+    }
+
+    public static List<Message> allMessages(String who,String whom) throws SQLException, ClassNotFoundException {
         List<Message> message_coll = new ArrayList<>();
         MyID myID  = new MyID();
         try {
-            Connection con = DBConnector.initializeDatabase();
+         //   Connection con = DBConnector.initializeDatabase();
             PreparedStatement st = con
                     .prepareStatement("select * from messages where whom = ? and who= ?");
             st.setString(1, who);
@@ -38,21 +54,34 @@ public class MessageHandling {
     }
 
     public String getProfile(String sender_id) {
-       String whom2="for now empty";
+       String pic="for now empty";
+        String who="for now empty";
         try {
-            Connection con = DBConnector.initializeDatabase();
+
             PreparedStatement st = con
-                    .prepareStatement("select pic from users where id=?");
+                    .prepareStatement("select username, pic from users where id=?");
             st.setString(1, sender_id);
             ResultSet rset = st.executeQuery();
             while (rset.next()) {
-               whom2 = rset.getString("pic");
+                who= rset.getString("username");
+               pic = rset.getString("pic");
             }
+
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return whom2;
+        return who+"-"+pic;
 
     }
+    protected void finalize() throws Throwable
+    {
+        try { con.close(); }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        super.finalize();
+    }
+
+
 }

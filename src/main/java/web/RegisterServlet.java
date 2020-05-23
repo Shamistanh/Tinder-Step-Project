@@ -1,6 +1,6 @@
 package web;
 
-import controller.AddUser;
+import userService.AddUser;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;

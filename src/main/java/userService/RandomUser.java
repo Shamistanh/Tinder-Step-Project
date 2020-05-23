@@ -1,13 +1,8 @@
-package service;
+package userService;
 
 import beans.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +12,18 @@ public class RandomUser {
     static List<User> all_users = usrs.people();
     static List<User> likebles = new ArrayList<>();
     static String USER_ID = "u_id";
-    static MyID myID  = new MyID();
+    static MyID myID;
+
+    static {
+        try {
+            myID = new MyID();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     static String MY_ID = myID.id();
     static List<User> likeble_users = usrs.likeblePeople(MY_ID);
     static User delivered = new User();

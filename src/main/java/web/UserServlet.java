@@ -1,7 +1,8 @@
 package web;
 
 import beans.User;
-import service.LikeCollection;
+import lombok.SneakyThrows;
+import likeService.LikeCollection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -24,6 +25,7 @@ public class UserServlet extends HttpServlet {
 
 
 
+    @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

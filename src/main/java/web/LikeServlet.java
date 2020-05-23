@@ -2,10 +2,10 @@ package web;
 
 
 import beans.User;
-import service.MyID;
-import service.RandomUser;
-import service.React;
-import service.Users;
+import userService.MyID;
+import userService.RandomUser;
+import likeService.React;
+import userService.Users;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +35,18 @@ public class LikeServlet extends HttpServlet {
     static Users usrs = new Users();
     static List<User> all_users = usrs.people();
     static List<User> likebles = new ArrayList<>();
-    static MyID myID  = new MyID();
+    static MyID myID;
+
+    static {
+        try {
+            myID = new MyID();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     static String MY_ID = myID.id();
     static List<User> likeble_users = usrs.likeblePeople(MY_ID);
     static User delivered = new User();

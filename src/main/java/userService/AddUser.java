@@ -1,4 +1,6 @@
-package controller;
+package userService;
+
+import connection.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

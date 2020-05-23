@@ -1,6 +1,6 @@
-package service;
+package userService;
 
-import controller.DBConnector;
+import connection.DBConnector;
 import web.LoginServlet;
 
 import java.sql.Connection;

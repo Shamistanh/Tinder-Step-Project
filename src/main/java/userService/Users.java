@@ -1,8 +1,8 @@
-package service;
+package userService;
 
 
 import beans.User;
-import controller.DBConnector;
+import connection.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class Users {
     static String username="";
@@ -56,12 +57,7 @@ public class Users {
     }
 
     public List<User> likeblePeople(String user_id) {
-        List<User> likebles = new ArrayList<>();
-        for (int i = 0; i <people().size() ; i++) {
-            if (!people().get(i).equals(user_id)){
-                likebles.add(people().get(i));
-            }
-        }
-        return likebles;
+        List<User> likebles = people();
+        return likebles.stream().filter(e->!e.getId().equals(MyID.id())).distinct().collect(Collectors.toList());
     }
 }
