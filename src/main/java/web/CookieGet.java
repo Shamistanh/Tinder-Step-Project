@@ -18,19 +18,6 @@ public class CookieGet extends HttpServlet {
         return hm;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        Cookie[] cookies = req.getCookies();
-        Arrays.stream(cookies).forEach(e->hm.put(e.getName(),e.getValue()));
-
-        try (PrintWriter w = resp.getWriter()) {
-//            w.write("Cookies read:\n");
-//            w.write(String.valueOf(hm.toString()));
-            hm.entrySet().forEach(entry->{
-                w.write(entry.getKey() + " " +  entry.getValue()+"\n");
-            });
-        }
-    }
 
 }

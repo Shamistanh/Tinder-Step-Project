@@ -26,6 +26,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-container">
+
                         <table class="table-users table" border="0">
                             <tbody>
                             <#list users as user>
@@ -47,14 +48,20 @@
                                       Last Login: ${user.getDate()}<br><small class="text-muted">${user.getDay()}days ago</small>
                                    </td>
                                    <td>
-                                  <form method="get" action="/messages">
-                                      <input type="hidden" name="user_id" value="${user.getId()}">
-                                      <input type="submit" style="color:white;" class="btn btn-success" value="send">
-                                  </form>
+
+                                       <form method="get" >
+                                           <input type="text" name="user_idd" value="${user.getId()}"/>
+                                           <input type="submit">
+
+                                       </form>
+
+
 
                                    </td>
                                 </tr>
+
                             </#list>
+                            <a href="/users" class="btn btn-danger" style="color: white">Back</a>
                             </tbody>
                         </table>
                     </div>

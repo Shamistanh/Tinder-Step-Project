@@ -34,7 +34,7 @@
 
 
 
-                    <button class="btn btn-outline-success btn-block" name="reaction" value="like"><span class="fa fa-heart"></span>Like</button>
+                    <button class="btn btn-outline-success btn-block" name="reaction" value="like"><span class="fa fa-heart"></span> Like</button>
                 </div>
                 <!--/col-->
             </div>
@@ -42,6 +42,7 @@
         </div>
         <!--/card-block-->
     </div>
+    <a href="/user-list" class="btn btn-success float-right" style="color:white"><span class="fa fa-heart"></span> Show Liked People</a>
 </div>
 </form>
 </body>

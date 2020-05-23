@@ -13,7 +13,7 @@ public class MyID {
 
 
     public static String id(){
-        String id="";
+        String id = null;
         try {
 
 
