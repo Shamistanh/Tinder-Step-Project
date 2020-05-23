@@ -56,31 +56,38 @@
                             <div class="sender-img">
                                 <img src="http://nicesnippets.com/demo/image1.jpg" class="float-left">
                             </div>
-                            <#list messages as message>
+
                             <div class="receive-msg-desc float-left ml-2">
                                 <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
-                                   ${message.message}
+                                   Hey! how are you?
                                 </p>
                                 <span class="receive-msg-time">ketty, Jan 25, 6:20 PM</span>
                             </div>
-                        </#list>
+                                <br>
+
                         </li>
+                        <#list sents as sent>
                         <li class="send-msg float-right mb-2">
                             <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
-                                nice <br>
-                                Are you fine ?
+<#--                                nice <br>-->
+<#--                                Are you fine ?-->
+                                ${sent.getMessage()}
                             </p>
                         </li>
+                        </#list>
+                        <#list receivings as receiving>
                         <li class="receive-msg float-left mb-2">
                             <div class="sender-img">
                                 <img src="http://nicesnippets.com/demo/image1.jpg" class="float-left">
                             </div>
                             <div class="receive-msg-desc float-left ml-2">
                                 <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
-                                    Yes always
+                                    ${receiving.getMessage()}
                                 </p>
                             </div>
+
                         </li>
+                        </#list>
                         <li class="send-msg float-right mb-2">
                             <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
                                 <a href="https://nicesnippets.com/" class="text-dark rounded" target="_blank"><u>https://nicesnippets.com/</u></a>
@@ -123,9 +130,13 @@
                         </div>
                         <div class="col-md-7 pl-0">
 
-                                <input type="text" class="border-0"  name="msj" placeholder=" Send message" />
-                                <a href="/message">send</a>
+<#--                <input type="text" class="border-0"  name="msj" placeholder=" Send message" />-->
+<#--             <a href="/messages">send</a>-->
+                            <form method="post">
 
+                                <input type="text" class="border-0" style="width: 82%"  name="msj" placeholder=" Send message" />
+                                <input class="float-right" style="border-radius: 30px; border: 1px solid dodgerblue" type="submit" value="send">
+                            </form>
 
                         </div>
                         <div class="col-md-3 text-right options-right">
