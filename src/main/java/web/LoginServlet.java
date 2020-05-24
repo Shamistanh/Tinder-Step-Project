@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
         if(checker.check(user, pwd)){
             response.sendRedirect("/users");
         }else {
-            response.sendRedirect("/login");
+            response.sendRedirect("/register");
         }
 
 

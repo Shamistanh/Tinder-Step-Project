@@ -22,6 +22,7 @@
         <div class="chat-main col-6 offset-3">
             <div class="col-md-12 chat-header">
                 <div class="row header-one text-white p-1">
+
                     <div class="col-md-6 name pl-2">
                         <i class="fa fa-comment"></i>
                         <h6 class="ml-1 mb-0">${header_name}</h6>

@@ -1,9 +1,13 @@
 package app;
 
-public class HelloWorldApp {
+public class HerokuEnv {
 
-  public static void main(String[] args) {
-    System.out.println("Hello World");
+  public static int port() {
+    try {
+      return Integer.parseInt(System.getenv("PORT"));
+    } catch (NumberFormatException ex) {
+      return 5000;
+    }
   }
 
 }
