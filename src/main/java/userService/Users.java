@@ -41,9 +41,10 @@ public class Users {
                 pic = rset.getString("pic");
                 id = rset.getString("id");
                 date = rset.getString("created_at");
-                Date date2 = new Date(Integer.parseInt(date.split("-")[2]),Integer.parseInt(date.split("-")[1]),Integer.parseInt(date.split("-")[0])-1900);
-                long milliseconds  = date2.getTime();
-                day = (int)TimeUnit.MILLISECONDS.toDays(milliseconds);
+               // Date date2 = new Date(Integer.parseInt(date.split("-")[2]),Integer.parseInt(date.split("-")[1]),Integer.parseInt(date.split("-")[0])-1900);
+                //long milliseconds  = date2.getTime();
+               // day = (int)TimeUnit.MILLISECONDS.toDays(milliseconds);
+                day = 0;
 
                 ar.add(new User(username,password,pic,date,day,id));
             }

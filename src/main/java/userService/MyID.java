@@ -1,5 +1,6 @@
 package userService;
 
+import beans.User;
 import connection.DBConnector;
 import web.LoginServlet;
 
@@ -7,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MyID {
 
@@ -28,26 +31,14 @@ public class MyID {
 
     public static String id(){
         String id = null;
-        try {
 
+        Users users = new Users();
+        List<User> arr = users.people().stream().filter(e->e.getUsername().equals(ls.getUser()) && e.getPassword().equals(ls.getPwd())).collect(Collectors.toList());
+        if (arr.size()>0){
+            return arr.get(0).getId();
+        }else
+        return "not logged";
 
-            // Initialize the database
-
-            PreparedStatement st = con
-                    .prepareStatement("select id from users where username = ? and password=?");
-
-            st.setString(1, ls.getUser());
-            st.setString(2, ls.getPwd());
-            ResultSet rset = st.executeQuery();
-            while (rset.next()) {
-                id = rset.getString("id");
-            }
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-            return id;
 
 
     }

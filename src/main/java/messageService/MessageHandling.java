@@ -57,23 +57,6 @@ public class MessageHandling {
     }
 
     public String getProfile(String sender_id) {
-       String pic="for now empty";
-        String who="for now empty";
-//        try {
-//
-//            PreparedStatement st = con
-//                    .prepareStatement("select username, pic from users where id=?");
-//            st.setString(1, sender_id);
-//            ResultSet rset = st.executeQuery();
-//            while (rset.next()) {
-//                who= rset.getString("username");
-//               pic = rset.getString("pic");
-//            }
-//
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
         Users usrs = new Users();
         List<User> users = usrs.people().stream().filter(e->e.getId().equals(sender_id)).collect(Collectors.toList());
 

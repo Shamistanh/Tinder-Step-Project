@@ -17,22 +17,28 @@ public class Checker {
     static LoginServlet ls = new LoginServlet();
     static String username = "";
     static String password = "";
+    static Users usrs = new Users();
     static HashMap<String, String> users = new HashMap<>();
 
     public static HashMap<String, String> all_users() {
-        try {
-            Connection con = DBConnector.initializeDatabase();
-            PreparedStatement st = con
-                    .prepareStatement("select username, password from users");
+//        try {
+//            Connection con = DBConnector.initializeDatabase();
+//            PreparedStatement st = con
+//                    .prepareStatement("select username, password from users");
+//
+//            ResultSet rset = st.executeQuery();
+//            while (rset.next()) {
+//                username = rset.getString("username");
+//                password = rset.getString("password");
+//                users.put(username, password);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-            ResultSet rset = st.executeQuery();
-            while (rset.next()) {
-                username = rset.getString("username");
-                password = rset.getString("password");
-                users.put(username, password);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (int i = 0; i < usrs.people().size(); i++) {
+            users.put(usrs.people().get(i).getUsername(), usrs.people().get(i).getPassword());
+
         }
         return users;
     }
