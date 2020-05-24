@@ -34,7 +34,7 @@ public class MessageHandling {
         try {
          //   Connection con = DBConnector.initializeDatabase();
             PreparedStatement st = con
-                    .prepareStatement("select * from messages where whom = ? and who= ?");
+                    .prepareStatement("select * from messages where whom = ? and who= ? order by date desc");
             st.setString(1, who);
             st.setString(2, whom);
             ResultSet rset = st.executeQuery();

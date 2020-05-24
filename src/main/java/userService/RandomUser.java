@@ -25,11 +25,16 @@ public class RandomUser {
     }
 
     static String MY_ID = myID.id();
-    static List<User> likeble_users = usrs.likeblePeople(MY_ID);
+    static List<User> likeble_users;
+
+    static {
+        likeble_users = usrs.likeblePeople(MY_ID);
+    }
+
     static User delivered = new User();
 
 
-    public static User generateRandom() {
+    public static User generateRandom() throws SQLException, ClassNotFoundException {
         if (likeble_users.isEmpty()){
             likeble_users = usrs.likeblePeople(MY_ID);
             generateRandom();

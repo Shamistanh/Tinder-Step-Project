@@ -19,7 +19,7 @@ public class ServerApp {
         handler.addServlet(new ServletHolder(new UserServlet(engine)), "/user-list");
         //handler.addServlet(new ServletHolder(new RedirectServlet("/register")), "/");
         handler.addServlet(new ServletHolder(new MessageServlet(engine)), "/messages");
-        handler.addServlet(new ServletHolder(new RegisterServlet()), "/register/*");
+        handler.addServlet(new ServletHolder(new RegisterServlet()), "/register");
         handler.addServlet(new ServletHolder(new LoginServlet()), "/login");
         handler.addServlet(new ServletHolder(new StaticServlet("images")), "/images");
         handler.addServlet(new ServletHolder(new StaticServlet("js")), "/js/*");

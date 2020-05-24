@@ -2,6 +2,8 @@ package web;
 
 
 import beans.User;
+import lombok.SneakyThrows;
+import userService.Checker;
 import userService.MyID;
 import userService.RandomUser;
 import likeService.React;
@@ -36,6 +38,7 @@ public class LikeServlet extends HttpServlet {
     static List<User> all_users = usrs.people();
     static List<User> likebles = new ArrayList<>();
     static MyID myID;
+    Checker checker = new Checker();
 
     static {
         try {
@@ -56,11 +59,10 @@ public class LikeServlet extends HttpServlet {
     }
 
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//       try (OutputStream os = resp.getOutputStream()) {
-//         Files.copy(Paths.get("content/templates", "like-page.ftl"), os);
-//       }
+            checker.login_checker(resp,myID);
 
 
 

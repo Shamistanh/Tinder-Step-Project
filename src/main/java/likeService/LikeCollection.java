@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class LikeCollection {
 
     static Connection con;
+    static String id;
 
     static {
         try {
@@ -33,9 +34,10 @@ public class LikeCollection {
 
             PreparedStatement st = con
                     .prepareStatement("SELECT users.id, users.username,users.password, users.pic, users.created_at  FROM users, reactions WHERE users.id = reactions.whom");
+
             ResultSet rset = st.executeQuery();
             while (rset.next()) {
-                String id = rset.getString("id");
+                id = rset.getString("id");
                 String username = rset.getString("username");
                 String password = rset.getString("password");
                 String profile = rset.getString("pic");
@@ -47,6 +49,7 @@ public class LikeCollection {
         catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("my id" + myID.id());
         return liked_coll.stream().filter(e->!e.getId().equals(myID.id())).distinct().collect(Collectors.toList());
     }
 

@@ -51,7 +51,7 @@
 
                                        <form method="get" >
                                            <input type="hidden" name="user_idd" value="${user.getId()}"/>
-                                           <input type="submit">
+                                           <input type="submit" value="Send Message" class="btn-btn-outline-success">
 
                                        </form>
 

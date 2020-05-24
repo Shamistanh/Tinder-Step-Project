@@ -3,24 +3,23 @@ package userService;
 import connection.DBConnector;
 import web.LoginServlet;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class Checker {
 
 
-
-
-
-
     static LoginServlet ls = new LoginServlet();
-    static  String username="";
-    static  String password="";
+    static String username = "";
+    static String password = "";
     static HashMap<String, String> users = new HashMap<>();
 
-    public static HashMap<String,String> all_users(){
+    public static HashMap<String, String> all_users() {
         try {
             Connection con = DBConnector.initializeDatabase();
             PreparedStatement st = con
@@ -30,10 +29,9 @@ public class Checker {
             while (rset.next()) {
                 username = rset.getString("username");
                 password = rset.getString("password");
-                users.put(username,password);
+                users.put(username, password);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return users;
@@ -43,8 +41,14 @@ public class Checker {
         try {
             return all_users().get(user).equals(pwd);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return false;
+        }
+    }
+
+    public static void login_checker(HttpServletResponse resp, MyID myID) throws SQLException, ClassNotFoundException, IOException {
+        if (myID.id() == null) {
+            resp.sendRedirect("/register");
         }
     }
 }
