@@ -49,7 +49,6 @@ public class LikeCollection {
         catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("my id" + myID.id());
         return liked_coll.stream().filter(e->!e.getId().equals(myID.id())).distinct().collect(Collectors.toList());
     }
 

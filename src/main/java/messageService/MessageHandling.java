@@ -1,8 +1,10 @@
 package messageService;
 
 import beans.Message;
+import beans.User;
 import connection.DBConnector;
 import userService.MyID;
+import userService.Users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MessageHandling {
 
@@ -56,23 +59,25 @@ public class MessageHandling {
     public String getProfile(String sender_id) {
        String pic="for now empty";
         String who="for now empty";
-        try {
+//        try {
+//
+//            PreparedStatement st = con
+//                    .prepareStatement("select username, pic from users where id=?");
+//            st.setString(1, sender_id);
+//            ResultSet rset = st.executeQuery();
+//            while (rset.next()) {
+//                who= rset.getString("username");
+//               pic = rset.getString("pic");
+//            }
+//
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        Users usrs = new Users();
+        List<User> users = usrs.people().stream().filter(e->e.getId().equals(sender_id)).collect(Collectors.toList());
 
-            PreparedStatement st = con
-                    .prepareStatement("select username, pic from users where id=?");
-            st.setString(1, sender_id);
-            ResultSet rset = st.executeQuery();
-            while (rset.next()) {
-                who= rset.getString("username");
-               pic = rset.getString("pic");
-            }
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return who+"-"+pic;
-
+        return users.get(0).getUsername()+"-"+users.get(0).getProfile();
     }
     protected void finalize() throws Throwable
     {
