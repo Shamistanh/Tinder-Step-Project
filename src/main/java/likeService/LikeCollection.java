@@ -45,11 +45,19 @@ public class LikeCollection {
 
                 liked_coll.add(new User(id, username,password,profile,date));
             }
+            con.close();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return liked_coll.stream().filter(e->!e.getId().equals(myID.id())).distinct().collect(Collectors.toList());
+        return liked_coll.stream().filter(e-> {
+            try {
+                return !e.getId().equals(myID.id());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            return false;
+        }).distinct().collect(Collectors.toList());
     }
 
     protected void finalize() throws Throwable

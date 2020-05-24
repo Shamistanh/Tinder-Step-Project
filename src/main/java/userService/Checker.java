@@ -20,7 +20,7 @@ public class Checker {
     static Users usrs = new Users();
     static HashMap<String, String> users = new HashMap<>();
 
-    public static HashMap<String, String> all_users() {
+    public static HashMap<String, String> all_users() throws SQLException {
 //        try {
 //            Connection con = DBConnector.initializeDatabase();
 //            PreparedStatement st = con

@@ -29,7 +29,7 @@ public class MyID {
     public MyID() throws SQLException, ClassNotFoundException {
     }
 
-    public static String id(){
+    public static String id() throws SQLException {
         String id = null;
 
         Users users = new Users();

@@ -56,7 +56,7 @@ public class MessageHandling {
         return message_coll;
     }
 
-    public String getProfile(String sender_id) {
+    public String getProfile(String sender_id) throws SQLException {
         Users usrs = new Users();
         List<User> users = usrs.people().stream().filter(e->e.getId().equals(sender_id)).collect(Collectors.toList());
 

@@ -35,7 +35,16 @@ public class LikeServlet extends HttpServlet {
 
 
     static Users usrs = new Users();
-    static List<User> all_users = usrs.people();
+    static List<User> all_users;
+
+    static {
+        try {
+            all_users = usrs.people();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     static List<User> likebles = new ArrayList<>();
     static MyID myID;
     Checker checker = new Checker();
@@ -50,8 +59,26 @@ public class LikeServlet extends HttpServlet {
         }
     }
 
-    static String MY_ID = myID.id();
-    static List<User> likeble_users = usrs.likeblePeople(MY_ID);
+    static String MY_ID;
+
+    static {
+        try {
+            MY_ID = myID.id();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    static List<User> likeble_users;
+
+    static {
+        try {
+            likeble_users = usrs.likeblePeople(MY_ID);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     static User delivered = new User();
 
     public LikeServlet(TemplateEngine engine) {
@@ -71,6 +98,7 @@ public class LikeServlet extends HttpServlet {
     }
 
 
+    @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         randomUser  = generateRandom();
@@ -111,7 +139,7 @@ public class LikeServlet extends HttpServlet {
     }
 
 
-    public static User generateRandom() {
+    public static User generateRandom() throws SQLException {
         if (likeble_users.isEmpty()){
             likeble_users = usrs.likeblePeople(MY_ID);
             generateRandom();

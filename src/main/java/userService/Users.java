@@ -7,6 +7,7 @@ import connection.DBConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,15 +21,25 @@ public class Users {
     static String date="";
     static String id="";
     static int day = 0;
+    static Connection con;
 
+    static {
+        try {
+            con = DBConnector.initializeDatabase();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public static List<User> people(){
+    public static List<User> people() throws SQLException {
         List<User> ar = new ArrayList<>();
         try {
 
 
             // Initialize the database
-            Connection con = DBConnector.initializeDatabase();
+
             PreparedStatement st = con
                     .prepareStatement("select id,username, password, pic, created_at from users");
 
@@ -51,14 +62,32 @@ public class Users {
 
         }
         catch (Exception e) {
+            con.close();
             e.printStackTrace();
         }
 
         return ar;
     }
 
-    public List<User> likeblePeople(String user_id) {
+    public List<User> likeblePeople(String user_id) throws SQLException {
         List<User> likebles = people();
-        return likebles.stream().filter(e->!e.getId().equals(MyID.id())).distinct().collect(Collectors.toList());
+        return likebles.stream().filter(e-> {
+            try {
+                return !e.getId().equals(MyID.id());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            return false;
+        }).distinct().collect(Collectors.toList());
+    }
+
+
+    protected void finalize() throws Throwable
+    {
+        try { con.close(); }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        super.finalize();
     }
 }

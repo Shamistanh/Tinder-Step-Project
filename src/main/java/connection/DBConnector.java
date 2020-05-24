@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DBConnector {
 
 
-
+        static Connection con;
 
     public static Connection initializeDatabase()
             throws SQLException, ClassNotFoundException
@@ -25,9 +25,18 @@ public class DBConnector {
        // String dbName = "sql-lesson";
 
         Class.forName(dbDriver);
-        Connection con = DriverManager.getConnection(URL ,
+      con = DriverManager.getConnection(URL ,
                 UNAME,
                 PWD);
         return con;
+    }
+
+    protected void finalize() throws Throwable
+    {
+        try { con.close(); }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        super.finalize();
     }
 }
