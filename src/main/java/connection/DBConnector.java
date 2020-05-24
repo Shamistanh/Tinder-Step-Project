@@ -15,7 +15,7 @@ public class DBConnector {
     {
         // Initialize all the information regarding
         // Database Connection
-        String URL = "postgres://nyataccyehwxrh:d7d0b02ba6051fee490b31b679376390f5121a6fbed7ed67d7ba50c34ed3cece@ec2-34-200-72-77.compute-1.amazonaws.com:5432/d6t2ihomrv0cr3";
+        String URL = "jdbc:postgresql://ec2-34-200-72-77.compute-1.amazonaws.com:5432/d6t2ihomrv0cr3";
         String UNAME = "nyataccyehwxrh";
         String PWD = "d7d0b02ba6051fee490b31b679376390f5121a6fbed7ed67d7ba50c34ed3cece";
         String dbDriver = "org.postgresql.Driver";
