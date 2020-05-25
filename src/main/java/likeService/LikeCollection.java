@@ -45,7 +45,6 @@ public class LikeCollection {
 
                 liked_coll.add(new User(id, username,password,profile,date));
             }
-            con.close();
         }
         catch (Exception e) {
             e.printStackTrace();
