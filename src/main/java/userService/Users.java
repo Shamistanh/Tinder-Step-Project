@@ -80,13 +80,4 @@ public class Users {
         }).distinct().collect(Collectors.toList());
     }
 
-
-//    protected void finalize() throws Throwable
-//    {
-//        try { con.close(); }
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        super.finalize();
-//    }
 }

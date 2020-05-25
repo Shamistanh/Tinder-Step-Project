@@ -6,6 +6,7 @@ import messageService.MessageHandling;
 import messageService.MessageService;
 import userService.Checker;
 import userService.MyID;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -19,21 +20,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MessageServlet  extends HttpServlet {
+public class MessageServlet extends HttpServlet {
     MyID myID = new MyID();
 
-    String sender_id= "sinama";
+    String sender_id = "sinama";
     Checker checker = new Checker();
-    String msg_text="deyer";
+    String msg_text = "deyer";
     List<String> messages = new ArrayList<>();
-    MessageHandling m_handl  = new MessageHandling();
-    MessageService messageService  = new MessageService();
+    MessageHandling m_handl = new MessageHandling();
+    MessageService messageService = new MessageService();
     private TemplateEngine engine;
 
     public MessageServlet(TemplateEngine engine) throws SQLException, ClassNotFoundException {
         this.engine = engine;
     }
-
 
 
     @SneakyThrows
@@ -44,10 +44,10 @@ public class MessageServlet  extends HttpServlet {
         String cookiess = Arrays.stream(cookies)
                 .map(c -> String.format("%s-%s", c.getName(), c.getValue()))
                 .collect(Collectors.joining());
-        if (cookiess.split("-").length>1){
+        if (cookiess.split("-").length > 1) {
             sender_id = cookiess.split("-")[1];
-            List<Message> all_sent  = m_handl.allMessages(myID.id(), sender_id);
-            List<Message> all_reveived  = m_handl.allMessages(sender_id,myID.id());
+            List<Message> all_sent = m_handl.allMessages(myID.id(), sender_id);
+            List<Message> all_reveived = m_handl.allMessages(sender_id, myID.id());
             data.put("sents", all_sent);
             data.put("receivings", all_reveived);
             data.put("opp_profile", m_handl.getProfile(sender_id).split("-")[1]);
@@ -56,7 +56,7 @@ public class MessageServlet  extends HttpServlet {
         }
 
 
-        engine.render("chat.ftl", data,resp);
+        engine.render("chat.ftl", data, resp);
 
 
     }
@@ -66,11 +66,11 @@ public class MessageServlet  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         msg_text = req.getParameter("msj");
-        messageService.insertToDB(myID.id(), sender_id, msg_text,java.time.LocalDate.now());
+        messageService.insertToDB(myID.id(), sender_id, msg_text, java.time.LocalDate.now());
         messages.add(msg_text);
         System.out.println(msg_text);
         resp.sendRedirect("/messages");
-        checker.login_checker(resp,myID);
+        checker.login_checker(resp, myID);
 
     }
 }

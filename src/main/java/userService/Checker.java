@@ -21,21 +21,6 @@ public class Checker {
     static HashMap<String, String> users = new HashMap<>();
 
     public static HashMap<String, String> all_users() throws SQLException {
-//        try {
-//            Connection con = DBConnector.initializeDatabase();
-//            PreparedStatement st = con
-//                    .prepareStatement("select username, password from users");
-//
-//            ResultSet rset = st.executeQuery();
-//            while (rset.next()) {
-//                username = rset.getString("username");
-//                password = rset.getString("password");
-//                users.put(username, password);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
         for (int i = 0; i < usrs.people().size(); i++) {
             users.put(usrs.people().get(i).getUsername(), usrs.people().get(i).getPassword());
 

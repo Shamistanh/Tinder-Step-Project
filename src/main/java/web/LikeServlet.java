@@ -26,12 +26,11 @@ public class LikeServlet extends HttpServlet {
     static String reaction = "0";
     private static final String USER_ID = "u_id";
     private static final String LIKE_ID = "liked_id";
-    private static String WHO ="" ;
+    private static String WHO = "";
     private static String WHOM = "";
     RandomUser ru;
     User randomUser;
     HashMap<String, Object> data = new HashMap<>();
-
 
 
     static Users usrs = new Users();
@@ -89,10 +88,7 @@ public class LikeServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            checker.login_checker(resp,myID);
-
-
-
+        checker.login_checker(resp, myID);
 
 
     }
@@ -101,7 +97,7 @@ public class LikeServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        randomUser  = generateRandom();
+        randomUser = generateRandom();
         WHO = myID.id();
         reaction = req.getParameter("reaction");
         Cookie c = new Cookie("liked_id", randomUser.getId());
@@ -114,19 +110,20 @@ public class LikeServlet extends HttpServlet {
         engine.render("like-page.ftl", data, resp);
 
         React react = new React();
-        if(reaction !=null){
-        if (reaction.equals("like")) {
-            react.ireact(WHO,WHOM,1);
+        if (reaction != null) {
+            if (reaction.equals("like")) {
+                react.ireact(WHO, WHOM, 1);
 
-        } else if (reaction.equals("dislike")) {
-            react.ireact(WHO,WHOM,2);
-        }}
+            } else if (reaction.equals("dislike")) {
+                react.ireact(WHO, WHOM, 2);
+            }
+        }
 
 
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-              if (cookie.getName().equals(LIKE_ID)) {
+                if (cookie.getName().equals(LIKE_ID)) {
                     WHOM = cookie.getValue();
                 }
 
@@ -135,17 +132,16 @@ public class LikeServlet extends HttpServlet {
         }
 
 
-
     }
 
 
     public static User generateRandom() throws SQLException {
-        if (likeble_users.isEmpty()){
+        if (likeble_users.isEmpty()) {
             likeble_users = usrs.likeblePeople(MY_ID);
             generateRandom();
-        }else {
-            int random_idx=0;
-            random_idx = (int)(Math.random()*likeble_users.size());
+        } else {
+            int random_idx = 0;
+            random_idx = (int) (Math.random() * likeble_users.size());
             delivered = likeble_users.get(random_idx);
             likeble_users.remove(random_idx);
         }
