@@ -62,7 +62,6 @@ public class Users {
 
         }
         catch (Exception e) {
-            con.close();
             e.printStackTrace();
         }
 
@@ -82,12 +81,12 @@ public class Users {
     }
 
 
-    protected void finalize() throws Throwable
-    {
-        try { con.close(); }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        super.finalize();
-    }
+//    protected void finalize() throws Throwable
+//    {
+//        try { con.close(); }
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        super.finalize();
+//    }
 }
