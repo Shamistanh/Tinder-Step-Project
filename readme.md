@@ -6,7 +6,7 @@ body
 
 In this project, you can use creditentials below for testing: 
 
-username: first@gmailcom 
+username: first@gmail.com 
 
 Password: first          
 
