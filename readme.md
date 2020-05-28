@@ -10,5 +10,5 @@ username: first@gmailcom
 
 Password: first          
 
-This code also has deployed to Heroku:   
+This code has been deployed to Heroku:   
 heroku link: https://tranquil-shore-61550.herokuapp.com/     
