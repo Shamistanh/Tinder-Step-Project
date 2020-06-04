@@ -30,41 +30,39 @@
                         <table class="table-users table" border="0">
                             <tbody>
                             <#list users as user>
-                               <tr>
-                                   <td width="10">
-                                     <div class="avatar-img">
-                                        <img class="img-circle" src="${user.getProfile()}" />  
-                                       </div>
+                                <tr>
+                                    <td width="10">
+                                        <div class="avatar-img">
+                                            <img class="img-circle" src="${user.getProfile()}" />  
+                                        </div>
 
                                     </td>
-                                   <td class="align-middle">
-                                       ${user.getUsername() }
-<#--                                       Herbert Hoover-->
+                                    <td class="align-middle">
+                                        ${user.getUsername()}
+                                        <#--                                       Herbert Hoover-->
                                     </td>
-                                   <td class="align-middle">
-                                       Builder Sales Agent
-                                   </td>
-                                   <td  class="align-middle">
-                                      Last Login:  0 <br><small class="text-muted">${user.getDay()}days ago</small>
-<#--                                       ${user.getDate()}-->
-                                   </td>
-                                   <td>
+                                    <td class="align-middle">
+                                        Builder Sales Agent
+                                    </td>
+                                    <td  class="align-middle">
+                                        Last Login:  0 <br><small class="text-muted">5 days ago</small>
+                                        <#--                                       ${user.getDate()}-->
+                                    </td>
+                                    <td>
 
-                                       <form method="get" >
-                                           <input type="hidden" name="user_idd" value="${user.getId()}"/>
-                                           <input type="submit" value="Send Message" class="btn-btn-outline-success">
+                                        <form method="get" >
+                                            <input type="hidden" name="user_idd" value="${user.getId()}"/>
+                                            <input type="submit" value="Send Message" class="btn-btn-outline-success">
 
-                                       </form>
-
-
+                                        </form>
 
 
-
-                                   </td>
+                                    </td>
                                 </tr>
 
                             </#list>
-                            <a href="/users" class="btn btn-danger" style="color: white">Back</a>
+                            <a href="/liked" class="btn btn-danger" style="color: white">Back</a>
+                            <a href="/logout" class="btn btn-danger ml-2" style="color: white">Logout</a>
                             </tbody>
                         </table>
                     </div>
