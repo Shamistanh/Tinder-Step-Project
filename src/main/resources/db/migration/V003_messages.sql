@@ -1,8 +1,8 @@
 create table messages
 (
-    id varchar,
-    username varchar,
-    password varchar,
-    pic varchar,
-    created_at date
+	id varchar not null,
+	who varchar,
+	whom varchar,
+	message varchar,
+	date date default now()
 );

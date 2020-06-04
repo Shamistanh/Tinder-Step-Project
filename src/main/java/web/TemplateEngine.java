@@ -16,29 +16,29 @@ import java.util.HashMap;
  */
 public class TemplateEngine {
 
-  private final Configuration conf;
+    private final Configuration conf;
 
-  public TemplateEngine(String fullPath) throws IOException {
-    this.conf = new Configuration(Configuration.VERSION_2_3_28) {{
-      setDirectoryForTemplateLoading(new File(fullPath));
-      setDefaultEncoding(String.valueOf(StandardCharsets.UTF_8));
-      setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-      setLogTemplateExceptions(false);
-      setWrapUncheckedExceptions(true);
-    }};
-  }
-
-  public static TemplateEngine folder(String path) throws IOException {
-    return new TemplateEngine(path);
-  }
-
-  public void render(String template, HashMap<String, Object> data, HttpServletResponse resp) {
-    resp.setCharacterEncoding(String.valueOf(StandardCharsets.UTF_8));
-
-    try (PrintWriter w = resp.getWriter()) {
-      conf.getTemplate(template).process(data, w);
-    } catch (TemplateException | IOException e) {
-      throw new RuntimeException("Freemarker error", e);
+    public TemplateEngine(String fullPath) throws IOException {
+        this.conf = new Configuration(Configuration.VERSION_2_3_28) {{
+            setDirectoryForTemplateLoading(new File(fullPath));
+            setDefaultEncoding(String.valueOf(StandardCharsets.UTF_8));
+            setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+            setLogTemplateExceptions(false);
+            setWrapUncheckedExceptions(true);
+        }};
     }
-  }
+
+    public static TemplateEngine folder(String path) throws IOException {
+        return new TemplateEngine(path);
+    }
+
+    public void render(String template, HashMap<String, Object> data, HttpServletResponse resp) {
+        resp.setCharacterEncoding(String.valueOf(StandardCharsets.UTF_8));
+
+        try (PrintWriter w = resp.getWriter()) {
+            conf.getTemplate(template).process(data, w);
+        } catch (TemplateException | IOException e) {
+            throw new RuntimeException("Freemarker error", e);
+        }
+    }
 }

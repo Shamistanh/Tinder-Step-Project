@@ -1,13 +1,14 @@
 package web;
 
-import userService.Checker;
-import userService.MyID;
+
+import service.MyCookie;
+import service.Checker;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.SQLException;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,50 +20,46 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static String user = "";
-    private static String pwd = "";
-    private static MyID myID;
+    public static String user = "";
+    public static String pwd = "";
+    Connection connection ;
 
-    static {
-        try {
-            myID = new MyID();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
+    public LoginServlet(Connection connection) {
+        this.connection = connection;
     }
+    Checker checker = new Checker(connection);
+    public LoginServlet() {
 
-    public static String getUser() {
-        return user;
-    }
-
-    public static String getPwd() {
-        return pwd;
-    }
-
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
-        try (OutputStream os = response.getOutputStream()) {
-            Files.copy(Paths.get("content/templates", "login.html"), os);
-
-
-        }
     }
 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Checker checker = new Checker();
 
         user = request.getParameter("logemail");
         pwd = request.getParameter("logpsw");
+        MyCookie.add("my_name", user, response);
+        MyCookie.add("my_pwd", pwd, response);
+        System.out.println("i am now in login servlet and user and pwd: "+user+" "+pwd);
         if(checker.check(user, pwd)){
-            response.sendRedirect("/users");
+            response.sendRedirect("/liked");
         }else {
-            response.sendRedirect("/register");
+            response.sendRedirect("/login");
         }
 
 
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
+        try (OutputStream os = response.getOutputStream()) {
+            Files.copy(Paths.get("content/templates", "login.html"), os);
+        }
+
+
+    }
+
+
 }

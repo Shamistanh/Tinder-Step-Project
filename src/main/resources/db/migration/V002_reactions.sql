@@ -1,8 +1,7 @@
 create table reactions
 (
-    id varchar,
-    username varchar,
-    password varchar,
-    pic varchar,
-    created_at date
+	id varchar not null,
+	who varchar,
+	reaction varchar default 0,
+	date date default now()
 );

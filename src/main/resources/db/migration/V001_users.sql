@@ -1,8 +1,9 @@
 create table users
 (
-    id varchar,
-    username varchar,
-    password varchar,
-    pic varchar,
-    created_at date
+	id varchar not null,
+	username varchar,
+	password varchar,
+	pic varchar,
+	date created_at default now()
+
 );

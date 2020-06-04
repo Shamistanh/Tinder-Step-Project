@@ -1,18 +1,33 @@
 package web;
 
-import userService.AddUser;
+import DAO.DAOUserSQL;
+import beans.User;
+import service.MyCookie;
+import service.MyId;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
 
 public class RegisterServlet extends HttpServlet {
 
+
     static String username;
     static String password;
+    static String repassword;
+
+    static String id;
     static  String profile;
+     static Connection con;
+
+    public RegisterServlet(Connection con) {
+        this.con = con;
+    }
+    public static DAOUserSQL daoUserSQL = new DAOUserSQL(con);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,12 +38,25 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         username = req.getParameter("email");
-         password = req.getParameter("psw");
-         profile = req.getParameter("profile");
-        AddUser au = new AddUser();
-        au.iadd(username,password,profile);
-        resp.sendRedirect("/users");
+
+        username = req.getParameter("email");
+        password = req.getParameter("psw");
+        repassword = req.getParameter("repsw");
+        profile = req.getParameter("profile");
+        id = MyId.generateId(username,password);
+        User user  = new User(username,password,profile,id);
+        System.out.println(user);
+       if (password.equals(repassword)){
+            daoUserSQL.put(user);
+           MyCookie.add("my_name", username, resp);
+           MyCookie.add("my_pwd", password, resp);
+            resp.sendRedirect("/liked");
+        }else {
+            resp.sendRedirect("/register");
+        }
+
+
+
 
     }
 

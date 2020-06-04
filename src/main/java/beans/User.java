@@ -3,8 +3,10 @@ package beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
-@AllArgsConstructor
+import java.sql.Date;
+
 @Data
 public class User {
 
@@ -15,13 +17,10 @@ public class User {
 
     String profile;
 
-    String date;
-
-    int day;
+    Date date;
 
     String id;
-
-    public User(String id, String username, String password, String profile, String date) {
+    public User(String username, String password, String profile, Date date, String id) {
         this.username = username;
         this.password = password;
         this.profile = profile;
@@ -29,7 +28,22 @@ public class User {
         this.id = id;
     }
 
-    public User() {
+    public User(String username, String password, String profile, String id) {
+        this.username = username;
+        this.password = password;
+        this.profile = profile;
+        this.id = id;
+    }
 
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", profile='" + profile + '\'' +
+                ", date=" + date +
+                ", id='" + id + '\'' +
+                '}';
     }
 }
