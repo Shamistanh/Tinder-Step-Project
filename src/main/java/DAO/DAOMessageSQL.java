@@ -51,7 +51,6 @@ public class DAOMessageSQL implements DAO<Message> {
             );
             data.add(s);
         }
-        conn.close();
         return data;
     }
 
