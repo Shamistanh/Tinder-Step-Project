@@ -28,7 +28,6 @@ public class RegisterServlet extends HttpServlet {
     }
     public static DAOUserSQL daoUserSQL = new DAOUserSQL(con);
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (OutputStream os = resp.getOutputStream()) {
