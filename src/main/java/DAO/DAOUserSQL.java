@@ -52,6 +52,7 @@ public class DAOUserSQL implements DAO<User> {
             );
             data.add(s);
         }
+        conn.close();
         return data;
     }
 
@@ -95,6 +96,7 @@ public class DAOUserSQL implements DAO<User> {
         stmt.setString(3, user.getPassword());
         stmt.setString(4, user.getProfile());
         stmt.execute();
+        conn.close();
     }
 
     @SneakyThrows

@@ -50,6 +50,7 @@ public class DAOReactionSQL implements DAO<Reaction> {
             );
             data.add(s);
         }
+        conn.close();
         return data;
     }
 
@@ -87,6 +88,7 @@ public class DAOReactionSQL implements DAO<Reaction> {
         stmt.setString(2, reaction.getWhom());
         stmt.setString(3, reaction.getReaction());
         stmt.execute();
+        conn.close();
     }
 
     @SneakyThrows
