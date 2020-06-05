@@ -15,10 +15,14 @@ public class MyCookie {
     }
 
     public static String get(String name, HttpServletRequest req){
+        try {
         Cookie[] cookies = req.getCookies();
         HashMap<String, String> cookieMap = new HashMap<>();
         Arrays.stream(cookies).forEach(e->cookieMap.put(e.getName(),e.getValue()));
         return cookieMap.get(name);
+        }catch (Exception ex){
+            return "";
+        }
     }
 
     public static void remove(HttpServletRequest req, HttpServletResponse resp){

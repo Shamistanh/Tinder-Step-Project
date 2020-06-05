@@ -4,13 +4,16 @@ package app;
 import db.ConnDetails;
 import db.DbConn;
 import db.DbSetup;
+import filters.LoginFilter;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import web.*;
 
+import javax.servlet.DispatcherType;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.EnumSet;
 
 public class ServerApp {
     public static void main(String[] args) throws Exception {
@@ -42,6 +45,12 @@ public class ServerApp {
         handler.addServlet(new ServletHolder(new StaticServlet("images")), "/images");
         handler.addServlet(new ServletHolder(new StaticServlet("js")), "/js/*");
         handler.addServlet(new ServletHolder(new StaticServlet("css")), "/css/*");
+
+        // primary security
+        handler.addFilter(LoginFilter.class,"/liked", EnumSet.of(DispatcherType.REQUEST));
+        handler.addFilter(LoginFilter.class,"/user-list", EnumSet.of(DispatcherType.REQUEST));
+        handler.addFilter(LoginFilter.class,"/messages", EnumSet.of(DispatcherType.REQUEST));
+
 
         server.setHandler(handler);
         conn.close();

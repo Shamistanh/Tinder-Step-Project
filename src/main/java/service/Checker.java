@@ -27,7 +27,14 @@ public class Checker {
         return hm;
     }
 
-    public boolean check(String user, String pwd) {
+    public static boolean check(String user, String pwd) {
+        if (user == null || pwd ==null){
+            user= "";
+            pwd="";
+        }
+        if (all_users().get(pwd)== null){
+            return false;
+        }else
         return all_users().get(pwd).equals(user);
 
     }
