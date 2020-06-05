@@ -59,7 +59,6 @@ public class MessageServlet extends HttpServlet {
         }
         engine.render("chat.ftl", data, resp);
 
-
     }
 
 

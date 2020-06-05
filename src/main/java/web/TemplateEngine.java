@@ -34,7 +34,6 @@ public class TemplateEngine {
 
     public void render(String template, HashMap<String, Object> data, HttpServletResponse resp) {
         resp.setCharacterEncoding(String.valueOf(StandardCharsets.UTF_8));
-
         try (PrintWriter w = resp.getWriter()) {
             conf.getTemplate(template).process(data, w);
         } catch (TemplateException | IOException e) {
