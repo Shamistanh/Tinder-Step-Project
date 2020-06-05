@@ -25,13 +25,13 @@ public class ServerApp {
 
 
 
-        Server server = new Server(port());
+        Server server = new Server(HerokuEnv.port());
         TemplateEngine engine = TemplateEngine.folder("content/templates");
         ServletContextHandler handler = new ServletContextHandler();
 
         handler.addServlet(new ServletHolder(new LikeServlet(engine,conn)), "/liked");
         handler.addServlet(new ServletHolder(new UserServlet(engine,conn)), "/user-list");
-       // handler.addServlet(new ServletHolder(new RegisterServlet(conn)), "/");
+        handler.addServlet(new ServletHolder(new RegisterServlet(conn)), "/");
         handler.addServlet(new ServletHolder(new MessageServlet(engine,conn)), "/messages");
         handler.addServlet(new ServletHolder(new RegisterServlet(conn)), "/register/*");
         handler.addServlet(new ServletHolder(new LoginServlet(conn)), "/login");
@@ -52,11 +52,5 @@ public class ServerApp {
 
     }
 
-    public static int port() {
-        try {
-            return Integer.parseInt(System.getenv("PORT"));
-        } catch (NumberFormatException ex) {
-            return 5000;
-        }
-    }
+
 }
