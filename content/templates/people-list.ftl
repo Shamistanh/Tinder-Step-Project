@@ -45,7 +45,7 @@
                                         Builder Sales Agent
                                     </td>
                                     <td  class="align-middle">
-                                        Last Login:  0 <br><small class="text-muted">5 days ago</small>
+                                        Last Login:  ${user.getDate()} <br><small class="text-muted">5 days ago</small>
                                         <#--                                       ${user.getDate()}-->
                                     </td>
                                     <td>

@@ -18,12 +18,6 @@ import java.util.EnumSet;
 public class ServerApp {
     public static void main(String[] args) throws Exception {
 
-        // temporary
-   // DbSetup.migrate(ConnDetails.url, ConnDetails.username, ConnDetails.password);
-      //  DbSetup.migrate(HerokuEnv.jdbc_url(), HerokuEnv.jdbc_username(), HerokuEnv.jdbc_password());
-        // temporary
-   // Connection conn = DbConn.create(ConnDetails.url, ConnDetails.username, ConnDetails.password);
-       // Connection conn = DbConn.createFromURL(HerokuEnv.jdbc_url());
         Class.forName(ConnDetails.dbDriver);
         Connection conn = DriverManager.getConnection(ConnDetails.url,
                 ConnDetails.username,
@@ -31,7 +25,7 @@ public class ServerApp {
 
 
 
-        Server server = new Server(HerokuEnv.port());
+        Server server = new Server(5000);
         TemplateEngine engine = TemplateEngine.folder("content/templates");
         ServletContextHandler handler = new ServletContextHandler();
 
