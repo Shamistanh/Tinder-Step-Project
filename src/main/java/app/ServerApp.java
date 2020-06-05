@@ -25,7 +25,7 @@ public class ServerApp {
 
 
 
-        Server server = new Server(5000);
+        Server server = new Server(port());
         TemplateEngine engine = TemplateEngine.folder("content/templates");
         ServletContextHandler handler = new ServletContextHandler();
 
@@ -50,5 +50,13 @@ public class ServerApp {
         server.start();
         server.join();
 
+    }
+
+    public static int port() {
+        try {
+            return Integer.parseInt(System.getenv("PORT"));
+        } catch (NumberFormatException ex) {
+            return 5000;
+        }
     }
 }
