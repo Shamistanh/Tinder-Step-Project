@@ -67,7 +67,6 @@ public class MessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         msg_text = req.getParameter("msj");
         sender_id = MyCookie.get("sender_id", req);
-        System.out.println("bu da sender id dir" + sender_id);
         daoMessageSQL.put(new Message(MyId.id(req, con), sender_id, msg_text, Date.valueOf(java.time.LocalDate.now())));
         messages.add(msg_text);
         resp.sendRedirect("/messages");
