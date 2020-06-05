@@ -31,7 +31,7 @@ public class ServerApp {
 
         handler.addServlet(new ServletHolder(new LikeServlet(engine,conn)), "/liked");
         handler.addServlet(new ServletHolder(new UserServlet(engine,conn)), "/user-list");
-        handler.addServlet(new ServletHolder(new RegisterServlet(conn)), "/");
+       // handler.addServlet(new ServletHolder(new RegisterServlet(conn)), "/");
         handler.addServlet(new ServletHolder(new MessageServlet(engine,conn)), "/messages");
         handler.addServlet(new ServletHolder(new RegisterServlet(conn)), "/register/*");
         handler.addServlet(new ServletHolder(new LoginServlet(conn)), "/login");
