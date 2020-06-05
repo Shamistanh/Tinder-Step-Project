@@ -45,7 +45,6 @@ public class ServerApp {
         handler.addFilter(LoginFilter.class,"/user-list", EnumSet.of(DispatcherType.REQUEST));
         handler.addFilter(LoginFilter.class,"/messages", EnumSet.of(DispatcherType.REQUEST));
 
-
         server.setHandler(handler);
         conn.close();
         server.start();
