@@ -11,8 +11,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.stream.FactoryConfigurationError;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,16 +29,16 @@ public class GiveMeUser extends HttpServlet {
         return meExcluded.get(random);
     }
 
-    public static List<User> giveMeLikedUsers(Connection con) {
+    public static List<User> giveMeLikedUsers(Connection con) throws SQLException {
         DAOReactionSQL daoReactionSQL = new DAOReactionSQL(con);
         DAOUserSQL daoUserSQL = new DAOUserSQL(con);
         List<User> liked_users = new ArrayList<>();
         List<String> whom = daoReactionSQL.getAll()
                 .stream().filter(e -> e.getReaction().equals("1")).map(u -> u.getWhom()).collect(Collectors.toList());
         for (String id : whom) {
-            liked_users.add(daoUserSQL.get(id).orElseThrow(RuntimeException::new));
+            liked_users.add(daoUserSQL.get(id).orElseThrow(FactoryConfigurationError::new));
         }
-        System.out.println("iked users " + liked_users);
+        con.close();
         return liked_users;
     }
 

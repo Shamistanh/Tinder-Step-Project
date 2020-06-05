@@ -39,6 +39,7 @@ public class UserServlet extends HttpServlet {
             resp.sendRedirect("/messages");
         }
         engine.render("people-list.ftl", data, resp);
+        con.close();
 
     }
 

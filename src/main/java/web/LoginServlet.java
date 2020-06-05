@@ -29,9 +29,6 @@ public class LoginServlet extends HttpServlet {
         this.connection = connection;
     }
     Checker checker = new Checker(connection);
-    public LoginServlet() {
-
-    }
 
 
     @Override
@@ -41,7 +38,6 @@ public class LoginServlet extends HttpServlet {
         pwd = request.getParameter("logpsw");
         MyCookie.add("my_name", user, response);
         MyCookie.add("my_pwd", pwd, response);
-        System.out.println("i am now in login servlet and user and pwd: "+user+" "+pwd);
         if(checker.check(user, pwd)){
             response.sendRedirect("/liked");
         }else {

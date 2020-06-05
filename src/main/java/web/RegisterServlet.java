@@ -44,7 +44,6 @@ public class RegisterServlet extends HttpServlet {
         profile = req.getParameter("profile");
         id = MyId.generateId(username,password);
         User user  = new User(username,password,profile,id);
-        System.out.println(user);
        if (password.equals(repassword)){
             daoUserSQL.put(user);
            MyCookie.add("my_name", username, resp);

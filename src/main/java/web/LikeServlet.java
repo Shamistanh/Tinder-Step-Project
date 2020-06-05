@@ -60,6 +60,7 @@ public class LikeServlet extends HttpServlet {
             }
         }
 
-
+con.close();
     }
+
 }

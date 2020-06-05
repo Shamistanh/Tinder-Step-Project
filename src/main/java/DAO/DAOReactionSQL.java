@@ -50,6 +50,7 @@ public class DAOReactionSQL implements DAO<Reaction> {
             );
             data.add(s);
         }
+        conn.close();
         return data;
     }
 

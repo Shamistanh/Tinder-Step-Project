@@ -51,6 +51,7 @@ public class DAOMessageSQL implements DAO<Message> {
             );
             data.add(s);
         }
+        conn.close();
         return data;
     }
 
@@ -91,6 +92,7 @@ public class DAOMessageSQL implements DAO<Message> {
         stmt.setString(2, message.getWhom());
         stmt.setString(3, message.getMessage());
         stmt.execute();
+        conn.close();
     }
 
     @SneakyThrows

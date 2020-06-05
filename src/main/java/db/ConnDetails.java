@@ -5,8 +5,8 @@ public class ConnDetails {
 //    public static final String username = "postgres";
 //    public static final String password = "sh7513244";
 //    public static  String dbDriver = "org.postgresql.Driver";
-public static final String url = "jdbc:postgresql://ec2-34-200-72-77.compute-1.amazonaws.com:5432/d6t2ihomrv0cr3";
-    public static final String username = "nyataccyehwxrh";
-    public static final String password = "d7d0b02ba6051fee490b31b679376390f5121a6fbed7ed67d7ba50c34ed3cece";
+public static final String url = "jdbc:postgresql://ec2-54-234-44-238.compute-1.amazonaws.com:5432/d30059mfrghnqj";
+    public static final String username = "ohhmuiywkddkue";
+    public static final String password = "71ff5d9a7a82ac7ce9c9919f75a4966d6c9d1c750b252b36f6e83a910917a4b0";
     public static  String dbDriver = "org.postgresql.Driver";
 }

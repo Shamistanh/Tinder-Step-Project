@@ -17,7 +17,6 @@ public class MyCookie {
     public static String get(String name, HttpServletRequest req){
         Cookie[] cookies = req.getCookies();
         HashMap<String, String> cookieMap = new HashMap<>();
-      //  Arrays.stream(cookies).map(e->cookieMap.put(e.getName(),e.getValue()));
         Arrays.stream(cookies).forEach(e->cookieMap.put(e.getName(),e.getValue()));
         return cookieMap.get(name);
     }

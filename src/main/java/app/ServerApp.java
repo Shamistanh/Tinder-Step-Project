@@ -47,5 +47,6 @@ public class ServerApp {
 
         server.start();
         server.join();
+        conn.close();
     }
 }
