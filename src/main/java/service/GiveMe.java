@@ -34,7 +34,7 @@ public class GiveMe extends HttpServlet {
         DAOUserSQL daoUserSQL = new DAOUserSQL(con);
         List<User> liked_users = new ArrayList<>();
         List<String> whom = daoReactionSQL.getAll()
-                .stream().filter(e -> e.getReaction().equals("1")).map(u -> u.getWhom()).collect(Collectors.toList());
+                .stream().filter(e -> e.getReaction().equals("1")).map(u -> u.getWhom()).distinct().collect(Collectors.toList());
         for (String id : whom) {
             liked_users.add(daoUserSQL.get(id).orElseThrow(FactoryConfigurationError::new));
         }
