@@ -24,12 +24,10 @@ public class Checker {
 
     public static HashMap<String, String> all_users() {
         HashMap<String, String> hm = (HashMap<String, String>) daoUserSQL.getAll().stream().collect(Collectors.toMap(User::getPassword,User::getUsername));
-        System.out.println(hm);
         return hm;
     }
 
     public boolean check(String user, String pwd) {
-        System.out.println(all_users());
         return all_users().get(pwd).equals(user);
 
     }

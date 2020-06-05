@@ -3,7 +3,7 @@ package web;
 import beans.User;
 import lombok.SneakyThrows;
 import service.MyCookie;
-import service.GiveMeUser;
+import service.GiveMe;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +31,7 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HashMap<String, Object> data = new HashMap<>();
-        List<User> l_users = GiveMeUser.giveMeLikedUsers(con);
+        List<User> l_users = GiveMe.giveMeLikedUsers(con);
         data.put("users", l_users);
         sender_id = req.getParameter("user_idd");
         MyCookie.add("sender_id",sender_id,resp);

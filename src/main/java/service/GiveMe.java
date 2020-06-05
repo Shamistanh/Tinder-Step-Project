@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GiveMeUser extends HttpServlet {
+public class GiveMe extends HttpServlet {
 
     public static User giveMeUserToLike(Connection conn, String myID) {
         DAOUserSQL daoUserSQL = new DAOUserSQL(conn);

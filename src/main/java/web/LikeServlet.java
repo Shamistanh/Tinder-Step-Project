@@ -3,7 +3,7 @@ package web;
 import beans.User;
 import lombok.SneakyThrows;
 import service.MyCookie;
-import service.GiveMeUser;
+import service.GiveMe;
 import service.MyId;
 import service.React;
 
@@ -42,7 +42,7 @@ public class LikeServlet extends HttpServlet {
 
         WHO = MyId.id(req,con);
         reaction = req.getParameter("reaction");
-        WHOM = GiveMeUser.giveMeUserToLike(con, WHO);
+        WHOM = GiveMe.giveMeUserToLike(con, WHO);
 
 
         HashMap<String,Object> data = new HashMap<>();
@@ -60,7 +60,7 @@ public class LikeServlet extends HttpServlet {
             }
         }
 
-con.close();
+        con.close();
     }
 
 }
