@@ -19,10 +19,13 @@ public class ServerApp {
     public static void main(String[] args) throws Exception {
 
         Class.forName(ConnDetails.dbDriver);
+
+      //  DbSetup.migrate(HerokuEnv.jdbc_url(), HerokuEnv.jdbc_username(), HerokuEnv.jdbc_password());
+
         Connection conn = DriverManager.getConnection(ConnDetails.url,
                 ConnDetails.username,
                 ConnDetails.password);
-
+//        Connection conn = DbConn.createFromURL(HerokuEnv.jdbc_url());
 
 
         Server server = new Server(HerokuEnv.port());
